@@ -27,9 +27,9 @@
      * @param {String} agent
      */
     function browserCheck(agent, vendor) {
-      const browserNameFound = Object.keys(browserNames).find((name) =>
-        new RegExp(name, "i").test(agent)
-      );
+      const browserNameFound = Object.keys(browserNames).find(function (name) {
+        return new RegExp(name, "i").test(agent);
+      });
 
       // Safari and Chrome have very similar userAgents.
       // use the vendor property to ensure it's Chrome.
@@ -44,10 +44,12 @@
       return browserNameFound;
     }
 
-    const isChromeBrowser = (
+    const isChromeBrowser = function(
       agent = window.navigator.userAgent,
       vendor = window.navigator.vendor
-    ) => browserCheck(agent, vendor) === browserNames.chrome;
+    ) { 
+        return browserCheck(agent, vendor) === browserNames.chrome;
+    }
 
     document.body.innerHTML = browserCheck()
       ? "using Chrome"
